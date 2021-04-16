@@ -1,15 +1,15 @@
 import { Controller, Get, Post } from '@nestjs/common';
-import { User } from './user.entity';
+import { User } from '../user.entity';
 
 @Controller('user')
 export class UserController {
     @Post()
-    register(): User {
+    register(): void /*TODO User*/ {
         //TOO implement
     }
 
     @Get()
-    login(): User {
+    login(): void /*TODO User*/ {
         //TOO implement
     }
 

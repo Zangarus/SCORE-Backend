@@ -36,10 +36,12 @@ export class User {
   entries: Entry[];
 
   constructor(user: IUser) {
-    this.username = user.username;
-    this.password = user.password;
-    this.firstName = user.firstName;
-    this.lastName = user.lastName;
-    this.score = 0;
+    if (user) {
+      this.username = user.username;
+      this.password = user.password;
+      this.firstName = user.firstName;
+      this.lastName = user.lastName;
+      this.score = 0;
+    }
   }
 }

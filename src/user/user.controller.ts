@@ -4,13 +4,13 @@ import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { User } from './user.entity';
-import { UsersService } from './user.service';
+import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
     constructor(
         private authService: AuthService,
-        private userService: UsersService,) { }
+        private userService: UserService,) { }
 
     @Post()
     async register(@Request() req) {

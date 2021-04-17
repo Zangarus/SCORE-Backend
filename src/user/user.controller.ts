@@ -1,11 +1,10 @@
-import { UseGuards, Controller, Get, Post, Body } from '@nestjs/common';
+import { UseGuards, Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { User } from './user.entity';
 import { UserService } from './user.service';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { Param } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiTags('user')
 @Controller('user')
@@ -36,6 +35,7 @@ export class UserController {
 
     @ApiOperation({ summary: 'User get endpoint' })
     @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @Get('/:username')
     async findUser(@Param('username') username: string): Promise<User> {
         return this.userService.findOne(username);
@@ -43,6 +43,7 @@ export class UserController {
 
     @ApiOperation({ summary: 'Summary get endpoint' })
     @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @Get('/summary')
     getSummary(): void /*TODO change this*/ {
         //TOO implement

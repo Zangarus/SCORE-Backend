@@ -16,14 +16,14 @@ export class UserController {
 
     @ApiOperation({ summary: 'Register endpoint' })
     @Post('/register')
-    async register(@Body() user: IUser) {
+    async register(@Body() user: IUser): Promise<{ access_token: string }> {
         return this.authService.login(await this.userService.register(user));
     }
 
     @ApiOperation({ summary: 'Login endpoint' })
     @UseGuards(LocalAuthGuard)
     @Post('/login')
-    async login(@Body() user: IUser) {
+    async login(@Body() user: IUser): Promise<{ access_token: string }> {
         return this.authService.login(user);
     }
 

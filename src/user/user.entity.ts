@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, Unique } from 'typeorm';
 import { Entry } from 'src/entry/entry.entity';
+import * as bcrypt from 'bcrypt';
 
 export interface IUser {
   id: string;
@@ -10,6 +11,7 @@ export interface IUser {
 }
 
 @Entity()
+@Unique(["username"])
 export class User {
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -38,10 +40,14 @@ export class User {
   constructor(user: IUser) {
     if (user) {
       this.username = user.username;
-      this.password = user.password;
+      this.password = bcrypt.hashSync(user.password, 8);
       this.firstName = user.firstName;
       this.lastName = user.lastName;
       this.score = 0;
     }
+  }
+
+  checkPassword(unencryptedPassword: string) {
+    return bcrypt.compareSync(unencryptedPassword, this.password);
   }
 }

@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, Unique } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, Unique, PrimaryColumn } from 'typeorm';
 import { Entry } from 'src/entry/entry.entity';
 import * as bcrypt from 'bcrypt';
 import { ApiProperty } from '@nestjs/swagger';
@@ -6,10 +6,8 @@ import { ApiProperty } from '@nestjs/swagger';
 @Entity()
 @Unique(["username"])
 export class User {
-  @PrimaryGeneratedColumn("uuid")
-  id?: string;
 
-  @Column()
+  @PrimaryColumn()
   username: string;
 
   @Column()
@@ -28,6 +26,7 @@ export class User {
   @OneToOne(() => Entry, {
     cascade: true
   })
+
   @JoinColumn()
   entries: Entry[];
 

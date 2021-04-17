@@ -16,7 +16,6 @@ export class UserController {
     @ApiOperation({ summary: 'Register endpoint' })
     @Post('/register')
     async register(@Body() user: User): Promise<{ token: string }> {
-        console.log(user)
         return await this.authService.login(await this.userService.register(user));
     }
 
@@ -24,7 +23,7 @@ export class UserController {
     @UseGuards(LocalAuthGuard)
     @Post('/login')
     async login(@Body() user: User): Promise<{ token: string }> {
-        return await this.authService.login(user);
+        return await this.authService.login(user)
     }
 
     @ApiOperation({ summary: 'Login verification endpoint' })
@@ -39,6 +38,15 @@ export class UserController {
     @Get('/:username')
     async findUser(@Param('username') username: string): Promise<User> {
         return this.userService.findOne(username);
+    }
+
+    @ApiOperation({ summary: 'Users get endpoint' })
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
+    @Get('/list')
+    async findUsers(): Promise<User[]> {
+        console.log("findUsers");
+        return this.userService.findAll();
     }
 
     @ApiOperation({ summary: 'Summary get endpoint' })

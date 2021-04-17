@@ -17,6 +17,11 @@ export class UserService {
         })
     }
 
+    async findAll(): Promise<User[] | undefined> {
+        console.log("findAll");
+        return this.userRepository.find({ select: ["username", "firstName", "lastName", "score"] });
+    }
+
     async register(userData: User) {
         return this.userRepository.save(new User(userData));
     }

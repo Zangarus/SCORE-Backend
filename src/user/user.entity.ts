@@ -28,7 +28,7 @@ export class User {
   })
 
   @JoinColumn()
-  entries: Entry[];
+  entries?: Entry[];
 
   constructor(user: User) {
     if (user) {

@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, PrimaryColumn } from 'typeorm';
 
 export enum TravelType {
     FOOT,
@@ -10,8 +10,8 @@ export enum TravelType {
 
 @Entity()
 export class Entry {
-    @PrimaryGeneratedColumn('uuid')
-    id?: string;
+    @PrimaryColumn()
+    username?: string;
 
     @Column()
     distance: number;
@@ -24,5 +24,5 @@ export class Entry {
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
     })
-    eintragsdatum?: Date;
+    timestamp?: Date;
 }

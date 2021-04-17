@@ -16,15 +16,21 @@ export class UserController {
 
     @ApiOperation({ summary: 'Register endpoint' })
     @Post('/register')
-    async register(@Body() user: User): Promise<{ access_token: string }> {
-        return this.authService.login(await this.userService.register(user));
+    async register(@Body() user: User): Promise<string> {
+        return (await this.authService.login(await this.userService.register(user)));
     }
 
     @ApiOperation({ summary: 'Login endpoint' })
     @UseGuards(LocalAuthGuard)
     @Post('/login')
-    async login(@Body() user: User): Promise<{ access_token: string }> {
-        return this.authService.login(user);
+    async login(@Body() user: User): Promise<string> {
+        return (await this.authService.login(user));
+    }
+
+    @ApiOperation({ summary: 'Login verification endpoint' })
+    @Get('/login')
+    async checkJWT(@Param('token') token: string): Promise<string> {
+        return (await this.authService.checkJWT(token));
     }
 
     @ApiOperation({ summary: 'User get endpoint' })

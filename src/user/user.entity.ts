@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
-import { Entry } from 'src/users/entry.entity';
+import { Entry } from 'src/entry/entry.entity';
 import { Interface } from 'node:readline';
 
 export interface IUser {

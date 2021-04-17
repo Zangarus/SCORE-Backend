@@ -8,6 +8,11 @@ export enum TravelType {
     PLANE
 }
 
+export interface IEntry {
+    distance: number;
+    travelType: TravelType;
+}
+
 @Entity()
 export class Entry {
     @PrimaryGeneratedColumn('uuid')
@@ -25,4 +30,11 @@ export class Entry {
         default: () => 'CURRENT_TIMESTAMP',
     })
     eintragsdatum?: Date;
+
+    constructor(entry: IEntry) {
+        if (entry) {
+            this.distance = entry.distance;
+            this.travelType = entry.travelType;
+        }
+    }
 }

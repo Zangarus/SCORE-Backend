@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IUser, User } from 'src/users/user.entity';
+import { IUser, User } from 'src/user/user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -20,6 +20,5 @@ export class UserService {
     async register(userData: IUser) {
         const userDummy = new User(userData);
         return this.userRepository.save(userDummy);
-
     }
 }

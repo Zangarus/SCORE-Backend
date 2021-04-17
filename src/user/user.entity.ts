@@ -1,35 +1,29 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, Unique } from 'typeorm';
 import { Entry } from 'src/entry/entry.entity';
 import * as bcrypt from 'bcrypt';
-
-export interface IUser {
-  id: string;
-  username: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-}
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 @Unique(["username"])
 export class User {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  id?: string;
 
   @Column()
   username: string;
 
   @Column()
-  password: string; //TODO don't store password in plain text and instead use https://github.com/kelektiv/node.bcrypt.js#readme
+  password: string;
 
   @Column()
+  @ApiProperty()
   firstName: string;
 
   @Column()
   lastName: string;
 
-  @Column()
-  score: number;
+  @Column({ type: 'int', default: 0 })
+  score?: number;
 
   @OneToOne(() => Entry, {
     cascade: true
@@ -37,7 +31,7 @@ export class User {
   @JoinColumn()
   entries: Entry[];
 
-  constructor(user: IUser) {
+  constructor(user: User) {
     if (user) {
       this.username = user.username;
       this.password = bcrypt.hashSync(user.password, 8);

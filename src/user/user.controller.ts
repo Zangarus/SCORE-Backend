@@ -2,7 +2,7 @@ import { UseGuards, Controller, Get, Request, Post, Body } from '@nestjs/common'
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
-import { IUser, User } from './user.entity';
+import { User } from './user.entity';
 import { UserService } from './user.service';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { Param } from '@nestjs/common';
@@ -16,14 +16,14 @@ export class UserController {
 
     @ApiOperation({ summary: 'Register endpoint' })
     @Post('/register')
-    async register(@Body() user: IUser): Promise<{ access_token: string }> {
+    async register(@Body() user: User): Promise<{ access_token: string }> {
         return this.authService.login(await this.userService.register(user));
     }
 
     @ApiOperation({ summary: 'Login endpoint' })
     @UseGuards(LocalAuthGuard)
     @Post('/login')
-    async login(@Body() user: IUser): Promise<{ access_token: string }> {
+    async login(@Body() user: User): Promise<{ access_token: string }> {
         return this.authService.login(user);
     }
 

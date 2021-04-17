@@ -11,6 +11,6 @@ export class EntryService {
     ) { }
 
     addEntry(entry: Entry) {
-        this.entryRepository.save(new Entry(entry));
+        this.entryRepository.save(this.entryRepository.create(entry));
     }
 }

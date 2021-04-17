@@ -5,6 +5,7 @@ import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { IUser, User } from './user.entity';
 import { UserService } from './user.service';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { Param } from '@nestjs/common';
 
 @ApiTags('user')
 @Controller('user')
@@ -14,28 +15,28 @@ export class UserController {
         private userService: UserService) { }
 
     @ApiOperation({ summary: 'Register endpoint' })
-    @Post()
+    @Post('/register')
     async register(@Body() user: IUser) {
         return this.authService.login(await this.userService.register(user));
     }
 
     @ApiOperation({ summary: 'Login endpoint' })
     @UseGuards(LocalAuthGuard)
-    @Post()
-    async login(@Body() user: User) {
+    @Post('/login')
+    async login(@Body() user: IUser) {
         return this.authService.login(user);
     }
 
     @ApiOperation({ summary: 'User get endpoint' })
     @UseGuards(JwtAuthGuard)
     @Get()
-    async findUser(@Request() req): Promise<User> {
-        return this.userService.findOne(req.username);
+    async findUser(@Param('username') username: string): Promise<User> {
+        return this.userService.findOne(username);
     }
 
     @ApiOperation({ summary: 'Summary get endpoint' })
     @UseGuards(JwtAuthGuard)
-    @Get()
+    @Get('/summary')
     getSummary(): void /*TODO change this*/ {
         //TOO implement
     }

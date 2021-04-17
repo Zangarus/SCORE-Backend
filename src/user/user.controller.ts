@@ -36,7 +36,7 @@ export class UserController {
 
     @ApiOperation({ summary: 'User get endpoint' })
     @UseGuards(JwtAuthGuard)
-    @Get()
+    @Get('/:username')
     async findUser(@Param('username') username: string): Promise<User> {
         return this.userService.findOne(username);
     }

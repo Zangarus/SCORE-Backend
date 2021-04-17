@@ -1,4 +1,4 @@
-import { UseGuards, Controller, Get, Request, Post, Body } from '@nestjs/common';
+import { UseGuards, Controller, Get, Post, Body } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
@@ -16,15 +16,16 @@ export class UserController {
 
     @ApiOperation({ summary: 'Register endpoint' })
     @Post('/register')
-    async register(@Body() user: User): Promise<string> {
-        return (await this.authService.login(await this.userService.register(user)));
+    async register(@Body() user: User): Promise<{ token: string }> {
+        console.log(user)
+        return await this.authService.login(await this.userService.register(user));
     }
 
     @ApiOperation({ summary: 'Login endpoint' })
     @UseGuards(LocalAuthGuard)
     @Post('/login')
-    async login(@Body() user: User): Promise<string> {
-        return (await this.authService.login(user));
+    async login(@Body() user: User): Promise<{ token: string }> {
+        return await this.authService.login(user);
     }
 
     @ApiOperation({ summary: 'Login verification endpoint' })

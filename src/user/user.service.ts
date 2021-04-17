@@ -18,7 +18,6 @@ export class UserService {
     }
 
     async register(userData: User) {
-        const userDummy = new User(userData);
-        return this.userRepository.save(userDummy);
+        return this.userRepository.save(new User(userData));
     }
 }

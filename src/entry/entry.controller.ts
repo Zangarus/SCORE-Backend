@@ -17,7 +17,8 @@ export class EntryController {
     @ApiBearerAuth()
     @Post()
     addEntry(@Body() entry: Entry): void {
-        this.scoreService.updateScore(entry);
+        console.log("AddEntry");
+        //this.scoreService.updateScore(entry);
         this.entryService.addEntry(entry);
     }
 }

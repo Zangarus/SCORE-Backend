@@ -146,10 +146,10 @@ export class FirstScoreAlgorithm implements IScoreAlgorithm {
                 oldScore.absScore -= AC.Bestrafung_FZ1;
             }
         }
-        console.log(oldScore)
+
         oldScore.absScore = Math.round(oldScore.absScore)
 
         return oldScore;
     }
-    /* nutzt private methods wo sinnvoll */
+
 }

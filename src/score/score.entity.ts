@@ -21,6 +21,30 @@ export class Score {
     @Column()
     endDate?: Date;
 
+    @Column()
+    distanceCar: number;
+
+    @Column()
+    distanceFartrain: number;
+
+    @Column()
+    distanceNeartrain: number;
+
+    @Column()
+    distanceEcar: number;
+
+    @Column()
+    distanceFoot: number;
+
+    @Column()
+    distanceBike: number;
+
+    @Column()
+    distanceEbike: number;
+
+    @Column()
+    distancePlane: number;
+
     constructor() {
         this.absScore = 0;
         this.relScore = 0;

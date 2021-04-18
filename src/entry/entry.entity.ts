@@ -5,7 +5,10 @@ export enum TravelType {
     FOOT,
     BIKE,
     CAR,
-    TRAIN,
+    ECAR,
+    EBIKE,
+    FARTRAIN,
+    NEARTRAIN,
     PLANE
 }
 
@@ -23,6 +26,9 @@ export class Entry {
     @Column()
     travelType: TravelType;
 
+    @Column()
+    passenger: number = 1;
+
     //TODO add column mitfahrer with default 1
 
     @CreateDateColumn({
@@ -30,5 +36,9 @@ export class Entry {
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
     })
+   get getDistance(): number{
+       return this.distance
+    }
+    
     timestamp?: Date;
 }

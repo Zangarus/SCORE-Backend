@@ -20,14 +20,14 @@ export class Entry {
     @ManyToOne(() => User, user => user.entries)
     user: User;
 
-    @Column()
+    @Column('int',{default: 0})
     distance: number;
 
     @Column()
     travelType: TravelType;
 
-    @Column()
-    passenger: number = 1;
+    @Column('int',{default: 1})
+    passenger: number;
 
     //TODO add column mitfahrer with default 1
 
@@ -36,9 +36,6 @@ export class Entry {
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
     })
-   get getDistance(): number{
-       return this.distance
-    }
     
     timestamp?: Date;
 }

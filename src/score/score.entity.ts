@@ -6,13 +6,13 @@ export class Score {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column()
+    @Column('int',{default: 0})
     absScore: number;
 
-    @Column()
+    @Column('int',{default: 0})
     relScore: number;
 
-    @Column()
+    @Column('int',{default: 0})
     emScore: number;
 
     @Column()
@@ -21,34 +21,31 @@ export class Score {
     @Column()
     endDate?: Date;
 
-    @Column()
+    @Column('int',{default: 0})
     distanceCar: number;
 
-    @Column()
+    @Column('int',{default: 0})
     distanceFartrain: number;
 
-    @Column()
+    @Column('int',{default: 0})
     distanceNeartrain: number;
 
-    @Column()
+    @Column('int',{default: 0})
     distanceEcar: number;
 
-    @Column()
+    @Column('int',{default: 0})
     distanceFoot: number;
 
-    @Column()
+    @Column('int',{default: 0})
     distanceBike: number;
 
-    @Column()
+    @Column('int',{default: 0})
     distanceEbike: number;
 
-    @Column()
+    @Column('int',{default: 0})
     distancePlane: number;
 
     constructor() {
-        this.absScore = 0;
-        this.relScore = 0;
-        this.emScore = 0;
         this.beginDate = new Date();
         this.endDate = new Date();
     }

@@ -35,7 +35,7 @@ export class UserController {
     @ApiOperation({ summary: 'User get endpoint' })
     @UseGuards(JwtAuthGuard)
     @ApiBearerAuth()
-    @Get('/:username')
+    @Get('/detail/:username')
     async findUser(@Param('username') username: string): Promise<User> {
         return this.userService.findOne(username);
     }
@@ -43,9 +43,8 @@ export class UserController {
     @ApiOperation({ summary: 'Users get endpoint' })
     @UseGuards(JwtAuthGuard)
     @ApiBearerAuth()
-    @Get('/list')
+    @Get('/all')
     async findUsers(): Promise<User[]> {
-        console.log("findUsers");
         return this.userService.findAll();
     }
 

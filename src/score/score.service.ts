@@ -31,12 +31,8 @@ export interface IScoreAlgorithm {
 export class FirstScoreAlgorithm implements IScoreAlgorithm {
 
     proceed(data: Entry, oldScore: Score): Score {
-<<<<<<< HEAD
-        if (data.travelType == TravelType.CAR) {                                      //Auto ausgewählt
-=======
         /*
         if (AC.VM == AC.A) {                                      //Auto ausgewählt
->>>>>>> ee6057a (dockerize app)
             if (data.distance >= 50) {                                   //Auto über 50 km
                 oldScore.absScore += ((((AC.Abs_A / 100) * data.getDistance) - AC.Ausgleich_A50) / data.passenger);//Score wird verändert
                 oldScore.distanceCar +=data.getDistance / data.passenger;                         //AC.km Zähler wird erhöht

@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, PrimaryColumn } from 'typeorm';
+import { User } from 'src/user/user.entity';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne } from 'typeorm';
 
 export enum TravelType {
     FOOT,
@@ -10,8 +11,11 @@ export enum TravelType {
 
 @Entity()
 export class Entry {
-    @PrimaryColumn()
-    username?: string;
+    @PrimaryGeneratedColumn('uuid')
+    id?: string;
+
+    @ManyToOne(() => User, user => user.entries)
+    user: User;
 
     @Column()
     distance: number;

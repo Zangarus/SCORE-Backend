@@ -19,13 +19,13 @@ export class ScoreConstants {
     public static readonly Ausgleich_FZ2000 = 0.5;
 
 
-    // ---------- Constants Bestrafungen und Belohnungen --------------   
-    public static readonly Bestrafung_A = 100;
-    public static readonly Bestrafung_FZ1 = 1000;
-    public static readonly Bestrafung_FZ2 = 400;
-    public static readonly Belohnung_FU = 100;
-    public static readonly Belohnung_FR = 100;
-    public static readonly Belohnung_EF = 100;
+    // ---------- Constants punishments and rewards --------------   
+    public static readonly punishment_A = 100;
+    public static readonly punishment_FZ1 = 1000;
+    public static readonly punishment_FZ2 = 400;
+    public static readonly reward_FU = 100;
+    public static readonly reward_FR = 100;
+    public static readonly reward_EF = 100;
 
     // ---------- Constants CO2 values --------------
     public static readonly CO2_FU = 0;

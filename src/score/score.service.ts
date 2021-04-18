@@ -14,7 +14,7 @@ export class ScoreService {
 
     async updateScore(entry: Entry) {
         const score = await this.scoreRepository.findOne({
-            where: { id: entry.user.score },
+            where: { id: entry.user.score.id },
         })
         //upate score through algorithm
         score.absScore = entry.distance;

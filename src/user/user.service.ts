@@ -19,7 +19,7 @@ export class UserService {
 
     async findAll(): Promise<User[] | undefined> {
         console.log("findAll");
-        return this.userRepository.find({ select: ["username", "firstName", "lastName", "score"] });
+        return (await this.userRepository.find({ select: ["username", "firstName", "lastName", "score", "entries"] }));
     }
 
     async register(userData: User) {

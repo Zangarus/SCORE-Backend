@@ -23,6 +23,8 @@ export class Entry {
     @Column()
     travelType: TravelType;
 
+    //TODO add column mitfahrer with default 1
+
     @CreateDateColumn({
         precision: null,
         type: 'timestamp',

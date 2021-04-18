@@ -25,15 +25,15 @@ export class ScoreService {
 }
 
 export interface IScoreAlgorithm {
-    proceed(data: Entry[]): Score;
+    proceed(data: Entry, oldScore: Score): Score;
 }
 
 export class FirstScoreAlgorithm implements IScoreAlgorithm {
 
-    proceed(data: Entry[]): Score {
+    proceed(data: Entry, oldScore: Score): Score {
         if (AC.VM == AC.A) {                                      //Auto ausgewählt
-            if (AC.km >= 50) {                                   //Auto über 50 km
-                AC.AbsScore += ((((AC.Abs_A / 100) * AC.km) - AC.Ausgleich_A50) / AC.Mitfahrer);//Score wird verändert
+            if (data.distance >= 50) {                                   //Auto über 50 km
+                oldScore.absScore += ((((AC.Abs_A / 100) * AC.km) - AC.Ausgleich_A50) / AC.Mitfahrer);//Score wird verändert
                 AC.km_A += AC.km / AC.Mitfahrer;                         //AC.km Zähler wird erhöht
             } else if (AC.km >= 10) {                            //Auto  10 bis 50km
                 AC.AbsScore += ((((AC.Abs_A / 100) * AC.km) * AC.Ausgleich_A10) / AC.Mitfahrer);

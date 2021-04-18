@@ -1,7 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, Unique, PrimaryColumn } from 'typeorm';
+import { Entity, Column, OneToOne, JoinColumn, Unique, PrimaryColumn, OneToMany } from 'typeorm';
 import { Entry } from 'src/entry/entry.entity';
 import * as bcrypt from 'bcrypt';
-import { ApiProperty } from '@nestjs/swagger';
+import { Score } from 'src/score/score.entity';
 
 @Entity()
 @Unique(["username"])
@@ -14,21 +14,22 @@ export class User {
   password: string;
 
   @Column()
-  @ApiProperty()
   firstName: string;
 
   @Column()
   lastName: string;
 
-  @Column({ type: 'int', default: 0 })
-  score?: number;
-
-  @OneToOne(() => Entry, {
+  @OneToMany(() => Entry, entry => entry.user, {
     cascade: true
   })
-
   @JoinColumn()
   entries?: Entry[];
+
+  @OneToOne(() => Score, {
+    cascade: true
+  })
+  @JoinColumn()
+  score?: Score;
 
   constructor(user: User) {
     if (user) {
@@ -36,7 +37,7 @@ export class User {
       this.password = bcrypt.hashSync(user.password, 8);
       this.firstName = user.firstName;
       this.lastName = user.lastName;
-      this.score = 0;
+      this.score = new Score();
     }
   }
 

@@ -13,13 +13,13 @@ export class UserService {
     async findOne(username: string): Promise<User | undefined> {
         return this.userRepository.findOne({
             where: { username: username },
-            relations: ['entries'],
+            relations: ['entries', 'score'],
         })
     }
 
     async findAll(): Promise<User[] | undefined> {
         console.log("findAll");
-        return (await this.userRepository.find({ select: ["username", "firstName", "lastName", "score", "entries"] }));
+        return this.userRepository.find({ select: ["username", "firstName", "lastName", 'entries', "score"] });
     }
 
     async register(userData: User) {

@@ -9,7 +9,7 @@ services:
     environment:
       # - MYSQL_ROOT_PASSWORD=test
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
-      - MYSQL_DATABASE=score
+      - MYSQL_DATABASE=SCORE
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=admin
     volumes:
